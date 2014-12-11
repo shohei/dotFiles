@@ -194,6 +194,29 @@ export ARDMK_DIR=~/Documents/arduino-mk
 export BOARDS_TXT=/Applications/Arduino1.0.5.app/Contents/Resources/Java/hardware/arduino/boards.txt
 export ARDUINO_VAR_PATH=/Applications/Arduino1.0.5.app/Contents/Resources/Java/hardware/arduino/variants
 
+# setting for peco
+for f (~/.zsh/peco-sources/*) source "${f}" # load peco sources
+bindkey '^r' peco-select-history
+bindkey '^@' peco-cdr
+
+function dir(){
+    DIR=`ls -F| grep / | peco`
+    if [ -n "$DIR" ];then
+      cd $DIR
+    fi
+}
+
+
+function peco-src () {
+    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
 
 
 #pyenv
