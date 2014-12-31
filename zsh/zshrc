@@ -51,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/Users/shohei/.nodebrew/current/bin:/usr/local/texlive/2013/bin/universal-darwin/:/Applications/Tex/TeXShop.app/Contents/Resources/TeXShop/bin/tslatexmk:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin:/Users/shohei/.rbenv/bin:/usr/local/bin:/usr/local/cuda/bin:/usr/local/bin/dex2jar:/Users/shohei/YAGARTO/bin:/Users/shohei/Documents/Android/sdk/tools:/Users/shohei/.opam/system/bin:/usr/local/sbin:/Users/shohei/pebble-dev/PebbleSDK-2.0-BETA3/bin:/Users/shohei/.rbenv/shims:/Users/shohei/.rbenv/bin:/Users/shohei/perl5/perlbrew/bin:/Users/shohei/perl5/perlbrew/perls/perl-5.19.1/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/usr/local/go/bin:/usr/texbin:/Users/shohei/.cabal/bin:/usr/local/devkitARM/bin:/usr/local/AVR/bin:/Applications/HI-TECH/picc/9.83/bin:/Users/shohei/sh:/Users/shohei/Documents/Android/android-sdk-macosx/platform-tools:/usr/local/h8-elf/bin:/usr/local/mysql/bin:/Users/shohei/Documents/Android/sdk/platforms/android-8:/Users/shohei/Documents/Android/sdk/platform-tools:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/opt/local/bin:/usr/local/devkitARM/bin:/Users/shohei/depot_tools:/Users/shohei/scala-2.10.2/bin:/usr/local/go/bin:/usr/local/fabmodules/bin:/usr/local/Cellar/macvim/7.4-72/bin"
+export PATH="/Users/shohei/.nodebrew/current/bin:/Applications/Tex/TeXShop.app/Contents/Resources/TeXShop/bin/tslatexmk:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin:/Users/shohei/.rbenv/bin:/usr/local/bin:/usr/local/cuda/bin:/usr/local/bin/dex2jar:/Users/shohei/YAGARTO/bin:/Users/shohei/Documents/Android/sdk/tools:/Users/shohei/.opam/system/bin:/usr/local/sbin:/Users/shohei/pebble-dev/PebbleSDK-2.0-BETA3/bin:/Users/shohei/.rbenv/shims:/Users/shohei/.rbenv/bin:/Users/shohei/perl5/perlbrew/bin:/Users/shohei/perl5/perlbrew/perls/perl-5.19.1/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/usr/texbin:/Applications/HI-TECH/picc/9.83/bin:/Users/shohei/sh:/Users/shohei/Documents/Android/sdk/platforms/android-8:/Users/shohei/Documents/Android/sdk/platform-tools:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/opt/local/bin:/Users/shohei/depot_tools"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -121,12 +121,14 @@ alias conclusion="vim ~/Dropbox/Thesis/src/chap9.tex"
 alias words="/Users/shohei/Dropbox/Thesis/tools/words.sh"
 export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig"
 
-
 # Add GHC 7.8.3 to the PATH, via http://ghcformacosx.github.io/
-export GHC_DOT_APP="/opt/homebrew-cask/Caskroom/ghc/7.8.3-r1/ghc-7.8.3.app"
+export GHC_DOT_APP="/Applications/ghc-7.8.3.app"
 if [ -d "$GHC_DOT_APP" ]; then
+    # export PATH="${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
     export PATH="${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
 fi
+
+
 
 alias q='qlmanage -p "$@" >& /dev/null'
 
@@ -188,6 +190,9 @@ alias diff="/usr/local/bin/diff"
 source /Users/shohei/perl5/perlbrew/etc/bashrc
 alias nw="/Applications/node-webkit.app/Contents/MacOS/node-webkit"
 
+export PATH="/Users/shohei/.cabal/bin":$PATH
+# export PATH="/usr/local/ghc/bin":$PATH
+
 
 export ARDUINO_DIR=/Applications/Arduino1.0.5.app/Contents/Resources/Java
 export ARDMK_DIR=~/Documents/arduino-mk
@@ -218,6 +223,25 @@ function peco-src () {
 zle -N peco-src
 bindkey '^]' peco-src
 
+function subl(){
+ if [ $# -ne 1 ];then
+     echo "#usage: subl <file or dir>"
+     return
+ fi
+ cmd="/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text "$1" &"
+ eval $cmd
+}
+
+#for cabal unix-time installation: maybe bug?
+PATH=/usr/local/bin/python3:$PATH
+PATH=/usr/local/bin/python:$PATH
+
+export GTK_PATH=/usr/local/lib/gtk-2.0
+
+export PATH=$HOME/.local/bin:$PATH
+
+export LIBRARY_PATH="/usr/local/Cellar/gcc/4.9.1/lib/gcc/x86_64-apple-darwin13.3.0/4.9.1/"
+export PATH=$PATH:"/Applications/Julia-0.3.4.app/Contents/Resources/julia/bin"
 
 #pyenv
 # if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi

@@ -117,6 +117,8 @@ vnoremap t :s/[\|+]/ /g<kEnter>
 vnoremap m :s/+-/ /g \| '<,'>:s/\|//g \| '<,'>:s/^.//g <kEnter>
 command MakeMultilineTableFromGridTable :'<,'>s/[|+]/ /g
 
+NeoBundle 'gregsexton/MatchTag'
+
 NeoBundle 'supermomonga/shaberu.vim'
 NeoBundle 'derekwyatt/vim-scala'
 
@@ -205,6 +207,9 @@ NeoBundle 'jeffreyiacono/vim-colors-wombat'
 "       \ }
 
 let g:syntastic_mode_map = { 'mode': 'passive' }
+NeoBundle "JesseKPhillips/d.vim"
+
+NeoBundle 'dart-lang/dart-vim-plugin'
 
 NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 ""
@@ -349,6 +354,10 @@ highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 "
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
+
+NeoBundle "JuliaLang/julia-vim"
 
 " NeocompleteとNeosnippetsがコンフリクトしてるようなので
 " Neocompleteは消しとく
