@@ -2,14 +2,11 @@ set nocompatible
 set whichwrap=b,s,h,l,<,>,[,]
 let $LANG = "en"
 let &t_Co=256
-syntax on
 set number
 set laststatus=2
 set ignorecase
 set cindent
 colorscheme railscasts 
-syntax enable
-hi Normal ctermfg=none ctermbg=none
 set hlsearch
 set autoindent
 set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
@@ -30,24 +27,14 @@ nnoremap a :a!<kEnter>
 "vnoremap t :MakeMultilineTableFromGridTable<kEnter>
 "command GenerateTable s/[|+]/ /g
 
-execute pathogen#infect()
-" * evervim {{{
-	nnoremap <silent> ,el :<C-u>EvervimNotebookList<CR>
-	nnoremap <silent> ,eT :<C-u>EvervimListTags<CR>
-	nnoremap <silent> ,en :<C-u>EvervimCreateNote<CR>
-	nnoremap <silent> ,eb :<C-u>EvervimOpenBrowser<CR>
-	nnoremap <silent> ,ec :<C-u>EvervimOpenClient<CR>
-	nnoremap ,es :<C-u>EvervimSearchByQuery<SPACE>
-	nnoremap <silent> ,et :<C-u>EvervimSearchByQuery<SPACE>tag:todo -tag:done -tag:someday<CR>
-	nnoremap <silent> ,eta :<C-u>EvervimSearchByQuery<SPACE>tag:todo -tag:done<CR>
-	let g:evervim_splitoption=''
-" ------------------------ }}}
 
 if has('vim_starting')
    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 call neobundle#rc(expand('~/.vim/bundle/'))
+syntax on
+syntax enable
 filetype plugin indent on     
 " Required!
 
@@ -80,7 +67,6 @@ NeoBundle 'Shougo/neosnippet-snippets'
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 NeoBundle 'jpalardy/vim-slime'
-NeoBundle 'scrooloose/syntastic'
 NeoBundle 'itchyny/calendar.vim'
 NeoBundle 'itchyny/thumbnail.vim'
 NeoBundle 'mattn/emmet-vim'
@@ -95,14 +81,22 @@ NeoBundle 'sbl/scvim'
 NeoBundle 'sophacles/vim-processing'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/nerdtree'
-"NeoBundle 'Lokaltog/vim-powerline'
-" let g:Powerline_symbols = 'fancy'
-" set statusline=2
-"let g:Powerline_symbols = 'compatible'
+
 NeoBundle 'alpaca-tc/alpaca_powertabline'
-NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-NeoBundle 'Lokaltog/powerline-fontpatcher'
-let g:Powerline_symbols = 'fancy'
+
+NeoBundle 'bling/vim-airline'
+  set guifont="Ricty\ Regular\ for\ Powerline"
+  let g:airline_enable_branch = 0
+  let g:airline_section_b = "%t %M"
+  let g:airline_section_c = ''
+  let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
+  let g:airline_section_x =
+        \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
+        \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
+        \ "%{strlen(&filetype)?&filetype:'no ft'}"
+  let g:airline_section_y = '%3p%%'
+  let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
+  let g:airline#extensions#whitespace#enabled = 0
 
 NeoBundle 'mattn/benchvimrc-vim'
 NeoBundle 'tpope/vim-rails'
@@ -115,11 +109,10 @@ let g:table_mode_corner_corner='|'
 "let g:table_mode_separator='+'
 vnoremap t :s/[\|+]/ /g<kEnter>
 vnoremap m :s/+-/ /g \| '<,'>:s/\|//g \| '<,'>:s/^.//g <kEnter>
-command MakeMultilineTableFromGridTable :'<,'>s/[|+]/ /g
+command! MakeMultilineTableFromGridTable :'<,'>s/[|+]/ /g
 
 NeoBundle 'gregsexton/MatchTag'
 
-NeoBundle 'supermomonga/shaberu.vim'
 NeoBundle 'derekwyatt/vim-scala'
 
 NeoBundle 'tpope/vim-markdown'
@@ -127,8 +120,11 @@ au BufRead,BufNewFile *.md set filetype=markdown
 let g:vim_markdown_folding_disabled=1
 NeoBundle "git://github.com/osyo-manga/unite-quickrun_config.git"
 
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
+
+" NeoBundle 'scrooloose/syntastic'
+" let g:syntastic_mode_map = { 'mode': 'passive' }
+" let g:syntastic_enable_signs=1
+" let g:syntastic_auto_loc_list=2
 
 let g:calendar_google_calendar = 1
 
@@ -168,22 +164,8 @@ let g:quickrun_config['html'] = {
 
 "NeoBundle 'itchyny/landscape.vim'
 "  colorscheme landscape
-"  let g:Powerline_theme = 'landscape'
-"  let g:Powerline_colorscheme = 'landscape'
-"  let g:airline_theme = 'landscape'
 "
-"NeoBundle 'bling/vim-airline'
-"  let g:airline_enable_branch = 0
-"  let g:airline_section_b = "%t %M"
-"  let g:airline_section_c = ''
-"  let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
-"  let g:airline_section_x =
-"        \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
-"        \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
-"        \ "%{strlen(&filetype)?&filetype:'no ft'}"
-"  let g:airline_section_y = '%3p%%'
-"  let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
-"  let g:airline#extensions#whitespace#enabled = 0
+
 NeoBundle 'jeffreyiacono/vim-colors-wombat'
 " NeoBundle 'itchyny/lightline.vim'
 "
@@ -206,7 +188,6 @@ NeoBundle 'jeffreyiacono/vim-colors-wombat'
 "       \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
 "       \ }
 
-let g:syntastic_mode_map = { 'mode': 'passive' }
 NeoBundle "JesseKPhillips/d.vim"
 
 NeoBundle 'dart-lang/dart-vim-plugin'
@@ -215,8 +196,6 @@ NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 ""
 "" Vim-LaTeX
 ""
-filetype plugin on
-filetype indent on
 set shellslash
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
@@ -259,15 +238,15 @@ cmap w!! w !sudo tee > /dev/null %
 
 exe "set runtimepath+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 
-command Prettify :%s/></>\r</g | filetype indent on | setf xml | normal gg=G 
+command! Prettify :%s/></>\r</g | filetype indent on | setf xml | normal gg=G 
 "command -nargs=? U call Unitizer(<f-args>)
 "function Unitizer(...)
 "    exec("Unite ". a:1 )
 "endfunction
 
 
-command -nargs=? C call GitCommit(<f-args>)
-function GitCommit(...)
+command! -nargs=? C call GitCommit(<f-args>)
+function! GitCommit(...)
  if a:0 >= 1
     let commitmsg = "\"" . a:1 ."\""
     let currentDir = "\"". expand("%:h")."\""
@@ -310,6 +289,7 @@ endfunction
 "NeoBundle 'Shougo/neosnippet-snippets'
 
 NeoBundle 'vim-scripts/applescript.vim'
+
 set imdisable
 
 set clipboard=unnamed
@@ -358,6 +338,9 @@ exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 set completeopt=menu,preview
 
 NeoBundle "JuliaLang/julia-vim"
+" ios-vim makes vim slow!! don't use it
+" NeoBundle 'eraserhd/vim-ios' 
+NeoBundle 'mattn/benchvimrc-vim'
 
 " NeocompleteとNeosnippetsがコンフリクトしてるようなので
 " Neocompleteは消しとく
@@ -403,3 +386,4 @@ NeoBundle "JuliaLang/julia-vim"
 " " RLoginであいまいな幅の文字の論理幅を1にします。
 " call writefile(["\e[?8428h"], '/dev/tty')
 
+hi Normal ctermfg=none ctermbg=none

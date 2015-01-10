@@ -51,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/Users/shohei/.nodebrew/current/bin:/Applications/Tex/TeXShop.app/Contents/Resources/TeXShop/bin/tslatexmk:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin:/Users/shohei/.rbenv/bin:/usr/local/bin:/usr/local/cuda/bin:/usr/local/bin/dex2jar:/Users/shohei/YAGARTO/bin:/Users/shohei/Documents/Android/sdk/tools:/Users/shohei/.opam/system/bin:/usr/local/sbin:/Users/shohei/pebble-dev/PebbleSDK-2.0-BETA3/bin:/Users/shohei/.rbenv/shims:/Users/shohei/.rbenv/bin:/Users/shohei/perl5/perlbrew/bin:/Users/shohei/perl5/perlbrew/perls/perl-5.19.1/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/usr/texbin:/Applications/HI-TECH/picc/9.83/bin:/Users/shohei/sh:/Users/shohei/Documents/Android/sdk/platforms/android-8:/Users/shohei/Documents/Android/sdk/platform-tools:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/opt/local/bin:/Users/shohei/depot_tools"
+export PATH="/Users/shohei/.nodebrew/current/bin:/Applications/Tex/TeXShop.app/Contents/Resources/TeXShop/bin/tslatexmk:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin:/Users/shohei/.rbenv/bin:/usr/local/bin:/usr/local/cuda/bin:/usr/local/bin/dex2jar:/Users/shohei/YAGARTO/bin:/Users/shohei/Documents/Android/sdk/tools:/Users/shohei/.opam/system/bin:/usr/local/sbin:/Users/shohei/pebble-dev/PebbleSDK-2.0-BETA3/bin:/Users/shohei/.rbenv/shims:/Users/shohei/.rbenv/bin:/Users/shohei/perl5/perlbrew/bin:/Users/shohei/perl5/perlbrew/perls/perl-5.19.1/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/usr/texbin:/Applications/HI-TECH/picc/9.83/bin:/Users/shohei/sh:/Users/shohei/Documents/Android/sdk/platform-tools:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/opt/local/bin:/Users/shohei/depot_tools"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -119,7 +119,7 @@ alias conclusion="vim ~/Dropbox/Thesis/src/chap9.tex"
 
 
 alias words="/Users/shohei/Dropbox/Thesis/tools/words.sh"
-export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig"
+export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig:/usr/local/lib/pkgconfig/"
 
 # Add GHC 7.8.3 to the PATH, via http://ghcformacosx.github.io/
 export GHC_DOT_APP="/Applications/ghc-7.8.3.app"
@@ -186,7 +186,6 @@ export DOCKER_CERT_PATH=/Users/shohei/.boot2docker/certs/boot2docker-vm
 alias date="gdate"
 export PATH=$GOPATH/bin:$PATH
 
-alias diff="/usr/local/bin/diff"
 source /Users/shohei/perl5/perlbrew/etc/bashrc
 alias nw="/Applications/node-webkit.app/Contents/MacOS/node-webkit"
 
@@ -233,8 +232,8 @@ function subl(){
 }
 
 #for cabal unix-time installation: maybe bug?
-PATH=/usr/local/bin/python3:$PATH
-PATH=/usr/local/bin/python:$PATH
+# PATH=/usr/local/bin/python3:$PATH
+# PATH=/usr/local/bin/python:$PATH
 
 export GTK_PATH=/usr/local/lib/gtk-2.0
 
@@ -243,12 +242,27 @@ export PATH=$HOME/.local/bin:$PATH
 export LIBRARY_PATH="/usr/local/Cellar/gcc/4.9.1/lib/gcc/x86_64-apple-darwin13.3.0/4.9.1/"
 export PATH=$PATH:"/Applications/Julia-0.3.4.app/Contents/Resources/julia/bin"
 
-#pyenv
-# if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-# export PYENV_ROOT=/usr/local/opt/pyenv
-# if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
 
 # alias python=/usr/bin/python
 # alias pip=/usr/bin/pip
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/shohei/.gvm/bin/gvm-init.sh" ]] && source "/Users/shohei/.gvm/bin/gvm-init.sh"
+
+export DOCKER_HOST=tcp://192.168.59.104:2376
+export DOCKER_CERT_PATH=/Users/shohei/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+export PYTHON_BUILD_CACHE_PATH=$HOME/src
+
+function gemacs(){
+    cmd="/Applications/Emacs.app/Contents/MacOS/Emacs "$@" &";
+    eval $cmd;
+}
+#
+# export NACL_SDK_ROOT=$HOME/Codes/nacl_sdk
+#
