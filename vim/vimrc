@@ -11,7 +11,7 @@ set hlsearch
 set autoindent
 set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 set lazyredraw
-set tabstop=4 expandtab shiftwidth=4 softtabstop=4
+set tabstop=2 expandtab shiftwidth=2 softtabstop=2
 "set tabstop=1 expandtab shiftwidth=1 softtabstop=1
 "source ~/.vim/plugin/matchit.vim
 "for moving tab in NerdTree
@@ -85,7 +85,8 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'alpaca-tc/alpaca_powertabline'
 
 NeoBundle 'bling/vim-airline'
-  set guifont="Ricty\ Regular\ for\ Powerline"
+  let g:airline_powerline_fonts=1
+  " set guifont=RictyForPowerline-Regular:h10
   let g:airline_enable_branch = 0
   let g:airline_section_b = "%t %M"
   let g:airline_section_c = ''
@@ -97,6 +98,7 @@ NeoBundle 'bling/vim-airline'
   let g:airline_section_y = '%3p%%'
   let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
   let g:airline#extensions#whitespace#enabled = 0
+
 
 NeoBundle 'mattn/benchvimrc-vim'
 NeoBundle 'tpope/vim-rails'

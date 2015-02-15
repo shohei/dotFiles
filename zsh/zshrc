@@ -6,6 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
+setopt no_flow_control
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -199,17 +200,51 @@ export BOARDS_TXT=/Applications/Arduino1.0.5.app/Contents/Resources/Java/hardwar
 export ARDUINO_VAR_PATH=/Applications/Arduino1.0.5.app/Contents/Resources/Java/hardware/arduino/variants
 
 # setting for peco
-for f (~/.zsh/peco-sources/*) source "${f}" # load peco sources
-bindkey '^r' peco-select-history
-bindkey '^@' peco-cdr
+# for f (~/.zsh/peco-sources/*) source "${f}" # load peco sources
+# # zle -N peco-select-history
+# bindkey '^r' peco-select-history
+# # zle -N peco-cdr
+# bindkey '^@' peco-cdr
 
-function dir(){
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+function peco-chdir(){
     DIR=`ls -F| grep / | peco`
     if [ -n "$DIR" ];then
       cd $DIR
     fi
 }
+zle -N peco-chdir 
+bindkey '^@' peco-chdir
 
+function peco-dfind() {
+    local current_buffer=$BUFFER
+    # .git系など不可視フォルダは除外
+    local selected_dir="$(find . -maxdepth 5 -type d ! -path "*/.*"| peco)"
+    if [ -d "$selected_dir" ]; then
+        BUFFER="${current_buffer} \"${selected_dir}\""
+        CURSOR=$#BUFFER
+        # ↓決定時にそのまま実行するなら
+        #zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-dfind
+bindkey '^x^f' peco-dfind
 
 function peco-src () {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
@@ -263,6 +298,23 @@ function gemacs(){
     cmd="/Applications/Emacs.app/Contents/MacOS/Emacs "$@" &";
     eval $cmd;
 }
-#
+
+export ANDROID_HOME=$HOME/Documents/Android/sdk
+
 # export NACL_SDK_ROOT=$HOME/Codes/nacl_sdk
-#
+#for rupa z
+. `brew --prefix`/etc/profile.d/z.sh
+
+export _Z_CMD=z
+. $(brew --prefix)/etc/profile.d/z.sh
+function peco-frequently-visited-directory(){
+    local selected_dir=$(z | tail -r | awk '{print $2}' | peco)
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-frequently-visited-directory
+bindkey '^]^f' peco-frequently-visited-directory
+
