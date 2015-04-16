@@ -52,7 +52,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/Users/shohei/.nodebrew/current/bin:/Applications/Tex/TeXShop.app/Contents/Resources/TeXShop/bin/tslatexmk:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin:/Users/shohei/.rbenv/bin:/usr/local/bin:/usr/local/cuda/bin:/usr/local/bin/dex2jar:/Users/shohei/YAGARTO/bin:/Users/shohei/Documents/Android/sdk/tools:/Users/shohei/.opam/system/bin:/usr/local/sbin:/Users/shohei/pebble-dev/PebbleSDK-2.0-BETA3/bin:/Users/shohei/.rbenv/shims:/Users/shohei/.rbenv/bin:/Users/shohei/perl5/perlbrew/bin:/Users/shohei/perl5/perlbrew/perls/perl-5.19.1/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/usr/texbin:/Applications/HI-TECH/picc/9.83/bin:/Users/shohei/sh:/Users/shohei/Documents/Android/sdk/platform-tools:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/opt/local/bin:/Users/shohei/depot_tools"
+export PATH="/Users/shohei/.nodebrew/current/bin:/Applications/Tex/TeXShop.app/Contents/Resources/TeXShop/bin/tslatexmk:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin:/usr/local/bin:/usr/local/cuda/bin:/usr/local/bin/dex2jar:/Users/shohei/YAGARTO/bin:/Users/shohei/Documents/Android/sdk/tools:/Users/shohei/.opam/system/bin:/usr/local/sbin:/Users/shohei/pebble-dev/PebbleSDK-2.0-BETA3/bin:/Users/shohei/perl5/perlbrew/bin:/Users/shohei/perl5/perlbrew/perls/perl-5.19.1/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/usr/texbin:/Applications/HI-TECH/picc/9.83/bin:/Users/shohei/sh:/Users/shohei/Documents/Android/sdk/platform-tools:/opt/X11/bin:/usr/local/CrossPack-AVR/bin:/opt/local/bin:/Users/shohei/depot_tools"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -98,27 +98,6 @@ export MYSQLPASS=`cat ~/.mysql_password | sed -e 's/^.*=//g'`
 
 alias marked2="/Applications/Marked\ 2.app/Contents/MacOS/Marked\ 2"
 
-alias main="vim ~/Dropbox/Thesis/src/main.tex"
-alias chap1="vim ~/Dropbox/Thesis/src/chap1.tex"
-alias intro="vim ~/Dropbox/Thesis/src/chap1.tex"
-alias chap2="vim ~/Dropbox/Thesis/src/chap2.tex"
-alias related="vim ~/Dropbox/Thesis/src/chap2.tex"
-alias chap3="vim ~/Dropbox/Thesis/src/chap3.tex"
-alias requirements="vim ~/Dropbox/Thesis/src/chap3.tex"
-alias chap4="vim ~/Dropbox/Thesis/src/chap4.tex"
-alias framework="vim ~/Dropbox/Thesis/src/chap4.tex"
-alias chap5="vim ~/Dropbox/Thesis/src/chap5.tex"
-alias system="vim ~/Dropbox/Thesis/src/chap5.tex"
-alias chap6="vim ~/Dropbox/Thesis/src/chap6.tex"
-alias exp="vim ~/Dropbox/Thesis/src/chap6.tex"
-alias chap7="vim ~/Dropbox/Thesis/src/chap7.tex"
-alias result="vim ~/Dropbox/Thesis/src/chap7.tex"
-alias chap8="vim ~/Dropbox/Thesis/src/chap8.tex"
-alias evaluation="vim ~/Dropbox/Thesis/src/chap8.tex"
-alias chap9="vim ~/Dropbox/Thesis/src/chap9.tex"
-alias conclusion="vim ~/Dropbox/Thesis/src/chap9.tex"
-
-
 alias words="/Users/shohei/Dropbox/Thesis/tools/words.sh"
 export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig:/usr/local/lib/pkgconfig/"
 
@@ -128,8 +107,6 @@ if [ -d "$GHC_DOT_APP" ]; then
     # export PATH="${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
     export PATH="${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
 fi
-
-
 
 alias q='qlmanage -p "$@" >& /dev/null'
 
@@ -151,7 +128,6 @@ man() {
 }
 
 alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
-
 
 path_append ()  { path_remove $1; export PATH="$PATH:$1"; }
 path_prepend () { path_remove $1; export PATH="$1:$PATH"; }
@@ -179,12 +155,8 @@ export PATH=$HOME/depot_tools:"$PATH"
 
 export GOPATH=$HOME/gocode/
 
-export DOCKER_TLS_VERIFY=1
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/shohei/.boot2docker/certs/boot2docker-vm
 
-
-alias date="gdate"
+# alias date="gdate"
 export PATH=$GOPATH/bin:$PATH
 
 source /Users/shohei/perl5/perlbrew/etc/bashrc
@@ -273,18 +245,16 @@ function subl(){
 export GTK_PATH=/usr/local/lib/gtk-2.0
 
 export PATH=$HOME/.local/bin:$PATH
-
-export LIBRARY_PATH="/usr/local/Cellar/gcc/4.9.1/lib/gcc/x86_64-apple-darwin13.3.0/4.9.1/"
 export PATH=$PATH:"/Applications/Julia-0.3.4.app/Contents/Resources/julia/bin"
-
-
 # alias python=/usr/bin/python
 # alias pip=/usr/bin/pip
-
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/shohei/.gvm/bin/gvm-init.sh" ]] && source "/Users/shohei/.gvm/bin/gvm-init.sh"
 
+
+
+# export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_HOST=tcp://192.168.59.104:2376
 export DOCKER_CERT_PATH=/Users/shohei/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
@@ -318,3 +288,5 @@ function peco-frequently-visited-directory(){
 zle -N peco-frequently-visited-directory
 bindkey '^]^f' peco-frequently-visited-directory
 
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

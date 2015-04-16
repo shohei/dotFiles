@@ -194,7 +194,11 @@ NeoBundle "JesseKPhillips/d.vim"
 
 NeoBundle 'dart-lang/dart-vim-plugin'
 
+" NeoBundle 'toyamarinyon/vim-swift'
+NeoBundle 'Keithbsmiley/swift.vim'
+
 NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+"
 ""
 "" Vim-LaTeX
 ""
