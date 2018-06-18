@@ -1,4 +1,3 @@
-set nocompatible
 set whichwrap=b,s,h,l,<,>,[,]
 let $LANG = "en"
 let &t_Co=256
@@ -12,79 +11,65 @@ set autoindent
 set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 set lazyredraw
 set tabstop=2 expandtab shiftwidth=2 softtabstop=2
-"set tabstop=1 expandtab shiftwidth=1 softtabstop=1
-"source ~/.vim/plugin/matchit.vim
-"for moving tab in NerdTree
 nnoremap <C-n> gt
 nnoremap <C-p> gT
-" map <Cmd-s> :w<kEnter>  "Works in normal mode, must press Esc first"
-" imap <Cmd-s> <Esc>:w<kEnter>i "Works in insert mode, saves and puts back in insert mode"
-"imap <C-j> <esc>
+
 inoremap <C-j> <esc>
 nnoremap <silent> <C-s> :s
-"nnoremap ; : "wanna use ; for forwarding 
+
 nnoremap a :a!<kEnter>
-"vnoremap t :MakeMultilineTableFromGridTable<kEnter>
-"command GenerateTable s/[|+]/ /g
 
-
-if has('vim_starting')
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-call neobundle#rc(expand('~/.vim/bundle/'))
 syntax on
-syntax enable
-filetype plugin indent on     
-" Required!
+syntax enable 
 
-" Installation check.
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-        \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-"finish
+"""""""""""""""""""""""""dein""""""""""""""""""""""""""""""""""""""""""
+if &compatible
+  set nocompatible
 endif
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-NeoBundle 'VimClojure'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-" Plugin key-mappings.  " <C-k>でsnippetの展開
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-NeoBundle 'jpalardy/vim-slime'
-NeoBundle 'itchyny/calendar.vim'
-NeoBundle 'itchyny/thumbnail.vim'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle "sudar/vim-arduino-syntax"
-NeoBundle "armyofevilrobots/vim-openscad"
-NeoBundle "shohei/vim-eagle-ulp"
-NeoBundle "shohei/vim-eagle-cam"
-NeoBundle "shohei/vim-eagle-scr"
-NeoBundle 'fatih/vim-go'
-NeoBundle 'sbl/scvim'
-NeoBundle 'sophacles/vim-processing'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'scrooloose/nerdtree'
+call dein#begin(expand('~/.vim/dein'))
 
-NeoBundle 'alpaca-tc/alpaca_powertabline'
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 
-NeoBundle 'bling/vim-airline'
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('Shougo/neomru.vim')
+call dein#add('Shougo/neosnippet')
+call dein#add('vim-scripts/VimClojure')
+call dein#add('Shougo/vimshell')
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/neosnippet')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('jpalardy/vim-slime')
+call dein#add('itchyny/calendar.vim')
+call dein#add('itchyny/thumbnail.vim')
+call dein#add('mattn/emmet-vim')
+call dein#add("sudar/vim-arduino-syntax")
+call dein#add("armyofevilrobots/vim-openscad")
+call dein#add("shohei/vim-eagle-ulp")
+call dein#add("shohei/vim-eagle-cam")
+call dein#add("shohei/vim-eagle-scr")
+call dein#add('fatih/vim-go')
+call dein#add('sbl/scvim')
+call dein#add('sophacles/vim-processing')
+call dein#add('thinca/vim-quickrun')
+call dein#add('scrooloose/nerdtree')
+call dein#add('alpaca-tc/alpaca_powertabline')
+call dein#add('bling/vim-airline')
+
+call dein#add('mattn/benchvimrc-vim')
+call dein#add('tpope/vim-rails')
+call dein#add('tomtom/tcomment_vim')
+call dein#add('tpope/vim-endwise')
+call dein#add('oplatek/Conque-shell')
+call dein#add('jeffreyiacono/vim-colors-wombat')
+call dein#add("JesseKPhillips/d.vim")
+call dein#add('vim-scripts/applescript.vim')
+
+call dein#end()
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
   let g:airline_powerline_fonts=1
   " set guifont=RictyForPowerline-Regular:h10
   let g:airline_enable_branch = 0
@@ -98,298 +83,3 @@ NeoBundle 'bling/vim-airline'
   let g:airline_section_y = '%3p%%'
   let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
   let g:airline#extensions#whitespace#enabled = 0
-
-
-NeoBundle 'mattn/benchvimrc-vim'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'oplatek/Conque-shell'
-NeoBundle 'dhruvasagar/vim-table-mode'
-let g:table_mode_always_active=1
-let g:table_mode_corner_corner='|'
-"let g:table_mode_separator='+'
-vnoremap t :s/[\|+]/ /g<kEnter>
-vnoremap m :s/+-/ /g \| '<,'>:s/\|//g \| '<,'>:s/^.//g <kEnter>
-command! MakeMultilineTableFromGridTable :'<,'>s/[|+]/ /g
-
-NeoBundle 'gregsexton/MatchTag'
-
-NeoBundle 'derekwyatt/vim-scala'
-
-NeoBundle 'tpope/vim-markdown'
-au BufRead,BufNewFile *.md set filetype=markdown
-let g:vim_markdown_folding_disabled=1
-NeoBundle "git://github.com/osyo-manga/unite-quickrun_config.git"
-
-
-" NeoBundle 'scrooloose/syntastic'
-" let g:syntastic_mode_map = { 'mode': 'passive' }
-" let g:syntastic_enable_signs=1
-" let g:syntastic_auto_loc_list=2
-
-let g:calendar_google_calendar = 1
-
-let g:go_disable_autoinstall = 1
-let g:go_fmt_autosave = 0
-
-let g:quickrun_config = {}
-let g:quickrun_config = {
-            \   "_" : {
-            \       "outputter/buffer/split" : ":botright 8sp",
-            \   }
-            \}
- let g:quickrun_config.tex = {
-             \ 'outputter' : 'error',
-             \ 'command'   : 'p',
-             \ 'outputter/error/error' : 'quickfix',
-             \ 'exec'      : ['%c'],
-             \ }
-"let g:quickrun_config={'*': {'split': ''}}
-"set splitbelow
-let g:quickrun_config.processing =  {
-      \     'command': 'processing-java',
-      \     'exec': '%c --sketch=$PWD/ --output=/Users/shohei/Library/Processing/Executable --run --force',
-      \}
-let g:quickrun_config['html'] = {
-            \ 'outputter' : 'null',
-            \ 'command'   : 'open',
-            \ 'exec'      : ['%c %s'],
-            \ }
-" let g:quickrun_config.markdown = {
-"       \ 'outputter' : 'error',
-"       \ 'command'   : 'open',
-"       \ 'cmdopt'    : '-a',
-"       \ 'args'      : '/Applications/Marked\ 2.app/Contents/MacOS/Marked \2',
-"       \ 'exec'      : ['%c %o %a %s'],
-"       \ }
-
-"NeoBundle 'itchyny/landscape.vim'
-"  colorscheme landscape
-"
-
-NeoBundle 'jeffreyiacono/vim-colors-wombat'
-" NeoBundle 'itchyny/lightline.vim'
-"
-" let g:lightline = {
-"       \ 'colorscheme': 'wombat',
-"       \ 'component': {
-"       \   'readonly': '%{&readonly?"⭤":""}',
-"       \ },
-"       \ 'separator': { 'left': '⮀', 'right': '⮂' },
-"       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-"       \ }
-
-" lightline.vim
-" let g:lightline = {
-"       \ 'colorscheme': 'wombat',
-"       \ 'component': {
-"       \   'readonly': '%{&readonly?"\u2b64":""}',
-"       \ },
-"       \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
-"       \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
-"       \ }
-
-NeoBundle "JesseKPhillips/d.vim"
-
-NeoBundle 'dart-lang/dart-vim-plugin'
-
-" NeoBundle 'toyamarinyon/vim-swift'
-NeoBundle 'Keithbsmiley/swift.vim'
-
-NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
-"
-""
-"" Vim-LaTeX
-""
-set shellslash
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-let g:Imap_UsePlaceHolders = 0
-let g:Imap_DeleteEmptyPlaceHolders = 1
-let g:Imap_StickyPlaceHolders = 0
-let g:Tex_DefaultTargetFormat = 'pdf'
-"let g:Tex_FormatDependency_pdf = 'pdf'
-let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-"let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
-let g:Tex_FormatDependency_ps = 'dvi,ps'
-let g:Tex_CompileRule_pdf = '/usr/texbin/ptex2pdf -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/pdflatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/luajitlatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
-"let g:Tex_CompileRule_pdf = '/usr/local/bin/ps2pdf $*.ps'
-let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
-"let g:Tex_BibtexFlavor = '/usr/texbin/bibtex'
-"let g:Tex_BibtexFlavor = '/usr/texbin/bibtexu'
-let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
-"let g:Tex_MakeIndexFlavor = '/usr/texbin/makeindex $*.idx'
-"let g:Tex_MakeIndexFlavor = '/usr/texbin/texindy $*.idx'
-let g:Tex_SmartKeyQuote = 0
-let g:Tex_UseEditorSettingInDVIViewer = 1
-let g:Tex_ViewRule_pdf = '/usr/bin/open'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXShop.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Firefox.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a "Adobe Reader.app"'
-
-" http://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
-
-exe "set runtimepath+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-
-command! Prettify :%s/></>\r</g | filetype indent on | setf xml | normal gg=G 
-"command -nargs=? U call Unitizer(<f-args>)
-"function Unitizer(...)
-"    exec("Unite ". a:1 )
-"endfunction
-
-
-command! -nargs=? C call GitCommit(<f-args>)
-function! GitCommit(...)
- if a:0 >= 1
-    let commitmsg = "\"" . a:1 ."\""
-    let currentDir = "\"". expand("%:h")."\""
-    let currentAbsDir= system("pwd") 
-    let syscom = "git add \-A " .currentDir. " \&\&  git commit \-m ".commitmsg
-    "let debugcom = syscom . "\&\& echo \"Committed with comment\: \"" . commitmsg ." \|\| echo \"Commit FAILED\"\."
-    "let debugcom2 = syscom . "\&\& say success\|\| say failed "
-    let debugcom3 = syscom . "\&\& sed \-i \-e \"s\/gitsuccess\=./gitsuccess\=1/\" \~\/\.zshrc \|\| sed \-i \-e \"s\/gitsuccess\=.\/gitsuccess\=2\/\" \~\/\.zshrc \; source \~\/\.zshrc"
-    "echo commitmsg
-    "echo debugcom3 
-    call system(debugcom3)
-
-    let gsuccess = $gitsuccess
-    if gsuccess==1
-        echo "Committed done with message: " .commitmsg
-    elseif gsuccess==2
-        echo "Git commit failed."
-    else
-        echo gsuccess
-        echo "Hey, something weird happened."
-    endif
- else
-   echo "Commit message should be specified!"
- end
-endfunction
-
-
-" Simple re-format for minified Javascript
-command! UnMinify call UnMinify()
-function! UnMinify()
-    %s/{\ze[^\r\n]/{\r/g
-    %s/){/) {/g
-    %s/};\?\ze[^\r\n]/\0\r/g
-    %s/;\ze[^\r\n]/;\r/g
-    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
-    normal ggVG=
-endfunction
-
-"NeoBundle 'Shougo/neosnippet'
-"NeoBundle 'Shougo/neosnippet-snippets'
-
-NeoBundle 'vim-scripts/applescript.vim'
-
-set imdisable
-
-set clipboard=unnamed
-set mouse=a
-set spell
-hi clear SpellBad
-hi SpellBad cterm=underline
-let Tex_FoldedSections=""
-let Tex_FoldedEnvironments=""
-let Tex_FoldedMisc=""
-set cursorline
-
-
-"タブ、空白、改行の可視化
-set list
-" set listchars=tab:>.,trail:_,eol:↲,extends:>,precedes:<,nbsp:%
-set listchars=trail:_,eol:↲,extends:>,precedes:<,nbsp:%
-set listchars+=tab:\ \ 
-
-"全角スペースをハイライト表示
-function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
-endfunction
-   
-if has('syntax')
-    augroup ZenkakuSpace
-        autocmd!
-        autocmd ColorScheme       * call ZenkakuSpace()
-        autocmd VimEnter,WinEnter * match ZenkakuSpace //
-    augroup END
-    call ZenkakuSpace()
-endif
-
-set backupskip=/tmp/*,/private/tmp/*
-if has('lua') 
-    set spelllang=en,cjk 
-endif
-
-" vimdiffの色設定
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
-"
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-set completeopt=menu,preview
-
-NeoBundle "JuliaLang/julia-vim"
-" ios-vim makes vim slow!! don't use it
-" NeoBundle 'eraserhd/vim-ios' 
-NeoBundle 'mattn/benchvimrc-vim'
-
-" NeocompleteとNeosnippetsがコンフリクトしてるようなので
-" Neocompleteは消しとく
-" if_luaが有効ならneocompleteを使う
-" NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
-" if neobundle#is_installed('neocomplete')
-"     " neocomplete用設定
-"     let g:neocomplete#enable_at_startup = 1
-"     let g:neocomplete#enable_ignore_case = 1
-"     let g:neocomplete#enable_smart_case = 1
-"     if !exists('g:neocomplete#keyword_patterns')
-"         let g:neocomplete#keyword_patterns = {}
-"     endif
-"     let g:neocomplete#keyword_patterns._ = '\h\w*'
-" elseif neobundle#is_installed('neocomplcache')
-"     " neocomplcache用設定
-"     let g:neocomplcache_enable_at_startup = 1
-"     let g:neocomplcache_enable_ignore_case = 1
-"     let g:neocomplcache_enable_smart_case = 1
-"     if !exists('g:neocomplcache_keyword_patterns')
-"         let g:neocomplcache_keyword_patterns = {}
-"     endif
-"     let g:neocomplcache_keyword_patterns._ = '\h\w*'
-"     let g:neocomplcache_enable_camel_case_completion = 1
-"     let g:neocomplcache_enable_underbar_completion = 1
-" endif
-" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-"
-"
-" syntax match luaTodo /^.*WIP.*$/ contained
-" highlight texTodo ctermbg=Yellow ctermfg=Red
-" syn match texTodo   contained   "\<\(TODO\|FIXME\):"
-" hi def link texTodo Todo
-"syntax on
-" highlight texTodo ctermbg=Yellow ctermfg=Red
-" syn match texTodo   contained   "\<\(TODO\|FIXME\):"
-" hi def link texTodo Todo
-
-" for drcs file type detect, not working...
-" Vimであいまいな幅の文字の論理幅を1にします
-" set ambiwidth=single
-" " RLoginであいまいな幅の文字の論理幅を1にします。
-" call writefile(["\e[?8428h"], '/dev/tty')
-
-hi Normal ctermfg=none ctermbg=none
